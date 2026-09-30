@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    STUDIO  =  the engine INTERFACE (the "Roblox Studio"-like editor shell).
+    This is the only executable in the solution. It references Tungsten (the
+    engine/runtime) as a library and hosts it inside an editor viewport, the
+    same way Roblox Studio / Unity Editor host their own runtime inside panels.
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>TungstenStudio</RootNamespace>
+    <AssemblyName>TungstenStudio</AssemblyName>
+    <ApplicationIcon Condition="Exists('..\shared\Icons\Model3D.png')"></ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenTK" Version="4.8.2" />
+    <!-- StbImageSharp: tiny, dependency-free image loader so we can read the
+         .bmp / .png / .jpg files from /shared straight into GL textures
+         without dragging in a huge imaging stack. -->
+    <PackageReference Include="StbImageSharp" Version="2.27.13" />
+    <!-- Used only to rasterize UI label text (panel titles, hierarchy rows,
+         slider values) into small GL textures. Not used for any gameplay. -->
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\tungsten\Tungsten.csproj" />
+  </ItemGroup>
+
+  <!--
+    Copy the whole /shared tree (icons, the Bitmap1076.bmp splash banner, audio,
+    etc.) next to the built executable so the editor can find everything at
+    runtime via a simple relative path, exactly like the brief asked for:
+    studio / libs / shared / tungsten sitting side-by-side.
+  -->
+  <ItemGroup>
+    <None Include="..\shared\**\*.*">
+      <Link>shared\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\libs\**\*.*" Condition="Exists('..\libs')">
+      <Link>libs\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
