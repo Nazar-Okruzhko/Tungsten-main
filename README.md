@@ -103,14 +103,3 @@ Controls:
 - **Play mode** (Play button, top-right of the toolbar): WASD to move, mouse
   to look, Space to jump, Ctrl to crouch, Shift to sprint, Left Mouse to
   fire the equipped gun, R to reload.
-
-## Suggested next steps
-
-1. Swap `SimplePhysicsWorld` for BepuPhysics (pure-managed, no native binary
-   needed — the friendliest upgrade path given this project's constraints).
-2. Add a real scene serialization format (`.json`) behind the toolbar's
-   New/Open/Save buttons, which currently just log stubs.
-3. Design the block palette together and extend `BlockRuntime`'s action
-   dictionary + build a node-graph editor panel for it.
-4. Add shadow mapping and an HDR + bloom post pass to push the renderer
-   toward the "best graphics possible" goal.
