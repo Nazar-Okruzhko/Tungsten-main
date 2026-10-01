@@ -1,4 +1,5 @@
 # Tungsten Studio
+<img width="400" height="240" alt="Bitmap1076" src="https://github.com/user-attachments/assets/5eddaed3-b73d-4976-853b-f5e7388344d5" />
 
 A Roblox-Studio-style editor shell (**studio**) built on top of a small
 custom game engine/runtime (**tungsten**), written in **C# / .NET 6** using
